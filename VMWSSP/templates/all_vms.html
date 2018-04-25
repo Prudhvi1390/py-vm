@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+    {% block content %}
+    <div class="container">
+        <div class="container">
+          <form action="{{ url_for('allvms.add_vms') }}" method="post">
+            <tr>
+              <td><input type="text" name="machinename" placeholder="Machine Name"><td>
+              <td><input type="text" name="ipaddress" placeholder="IP Address"><td>
+              <td><input type="text" name="osversion" placeholder="OS Version"><td>
+              <td><input type="text" name="hostname" placeholder="HostName"><td>
+            </tr>
+            <td><button type="submit" name="submit" value="Remove VM" class="btn btn-primary">Add VM</button><td>
+          </form>
+        </div>
+        <div>
+          <table class="col-12 table table-hover">
+            <thead>
+              <tr bgcolor="#00a3e3">
+                <th>Machine Name</th>
+                <th>IP Address</th>
+                <th>OS Version</th>
+                <th>Host Name</th>
+                <th>Assigned To</th>
+                <th>Purpose</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for VM in allVMs %}
+                  {% if VM[4] == '' and VM[8] == '' %}
+                  <tr class="table-success">
+                    <td>{{ VM[0] }}</td>
+                    <td>{{ VM[1] }}</td>
+                    <td>{{ VM[2] }}</td>
+                    <td>{{ VM[3] }}</td>
+                    <td>{{ VM[4] }}</td>
+                    <td>{{ VM[5] }}</td>
+                    <td>{{ VM[6] }}</td>
+                    <td>{{ VM[7] }}</td>
+                  </tr>
+                  {% else %}
+                  <tr class="bg-danger">
+                   <td>{{ VM[0] }}</td>
+                   <td>{{ VM[1] }}</td>
+                   <td>{{ VM[2] }}</td>
+                   <td>{{ VM[3] }}</td>
+                   <td>{{ VM[4] }}</td>
+                   <td>{{ VM[5] }}</td>
+                   <td>{{ VM[6] }}</td>
+                   <td>{{ VM[7] }}</td>
+                   <td>{{ VM[8] }}</td>
+                  </tr>
+                  {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+    {% endblock %}

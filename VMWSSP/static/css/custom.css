@@ -1,0 +1,18 @@
+
+.text-left {
+    margin-left: 1cm;
+}
+
+.pad-bottom {
+    padding-bottom: 70px;
+}
+
+.border {
+    padding: 20px;
+    border: solid 2px #5FCF80;
+    border-radius: 25px;
+}
+
+.text-bold {
+  font-weight: bold;
+}

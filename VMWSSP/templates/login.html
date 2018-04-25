@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 border">
+                    <em>
+                      <h2>Lab Machine Self Service Portal</h2>
+                      <div>
+                        <h3>Instructions:</h3>
+                        Maximum 2 VMs will be allocated per user.
+                        <h6>Any Issues, please contact below: </h6>
+                      </em>
+                    </div>
+                    <p>{{user}}</p>
+                </div>
+                <div class="col-lg-4 col-md-5 pad-top">
+                    <h4>Enter Your LAN ID here:</h4>
+                    <form class="input-group" action="{{ url_for('homepage.user_login') }}" method="POST">
+                        <input class="form-control" type="text" name="requester" placeholder="Lan ID">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit">Login</button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

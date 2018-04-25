@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+    {% block content %}
+    <div class="container">
+      <form action="{{ url_for('allocatedvms.remove_vms')}}" method="post">
+        <div>
+            <table class="col-10 table table-hover">
+              <thead>
+                <tr bgcolor="#00a3e3">
+                  <th></th>
+                  <th>Machine Name</th>
+                  <th>IP Address</th>
+                  <th>OS VErsion</th>
+                  <th>Host Name</th>
+                  <th>Assigned To</th>
+                  <th>Purpose</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for allocatedVM in allocatedVMs %}
+                <tr>
+                  <td><input type="checkbox" name="check" value="{{ allocatedVM[0] }}"> </td>
+                  <td>{{ allocatedVM[0] }}</td>
+                  <td>{{ allocatedVM[1] }}</td>
+                  <td>{{ allocatedVM[2] }}</td>
+                  <td>{{ allocatedVM[3] }}</td>
+                  <td>{{ allocatedVM[4] }}</td>
+                  <td>{{ allocatedVM[5] }}</td>
+                  <td>{{ allocatedVM[6] }}</td>
+                  <td>{{ allocatedVM[7] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        <div>
+          <button type="submit" name="submit" value="Remove VM" class="btn btn-danger">Remove VM</button>
+        </div>
+      </form>
+    </div>
+    {% endblock %}

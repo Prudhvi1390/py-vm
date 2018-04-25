@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+    <div class="container">
+        <div class="page-header">
+          <h2>{{vminfo[0]}}</h2>
+          Machine Name : {{ vminfo[0] }} </br>
+          IP Address : {{ vminfo[1] }} </br>
+          OS Version : {{ vminfo[2] }} </br>
+          HostName : {{ vminfo[3] }} </br>
+          Assigned To : {{ vminfo[4] }} </br>
+          Purpose : {{ vminfo[5] }} </br>
+          Start Date : {{ vminfo[6] }} </br>
+          End Date: {{ vminfo[7] }} </br>
+          <div class="row">
+            <form action="{{ url_for('vmprocess.update_vmstatus', vmname = vminfo[0]) }}" method="post">
+              <button type="submit" class="btn btn-primary" name="submit" value="Extend VM">Extend VM</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal"
+                      data-target="#myModal" data-name="Remove VM">Remove VM</button>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">Remove VM</h4>
+                    </div>
+                    <div class="modal-body">
+                      <h6>{{ vminfo[0] }} VM will get deallocated. Are you sure  ?</h6>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" name="submit" value="Remove VM" class="btn btn-danger">Remove VM</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    {% endblock %}

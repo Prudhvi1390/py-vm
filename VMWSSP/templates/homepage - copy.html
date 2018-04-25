@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+    <div class="container">
+          <div class="text-left">
+            <h3>Virtual Machines</h3>
+            <p><em>Below are the list of assigned machines for you:</em></p>
+          </div>
+        {% if count == 0  %}
+        <hr>
+        <h5 style="color:red;">No Virtual Machines assigned to you</h4>
+        {% endif %}
+        {% if count != 0  %}
+        <table class="col-10 table table-hover">
+          <thead>
+            <tr>
+              <th>Machine Name</th>
+              <th>IP Address</th>
+              <th>OS Version</th>
+              <th>Purpose</th>
+              <th>End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for allocatedVM in allocatedVMs %}
+            <tr>
+              <td><a href="{{url_for('vmprocess.vm_page', vmname = allocatedVM[0])}}">{{ allocatedVM[0] }}</a></td>
+              <td>{{ allocatedVM[1] }}</td>
+              <td>{{ allocatedVM[2] }}</td>
+              <td>{{ allocatedVM[3] }}</td>
+              <td>{{ allocatedVM[4] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="container border">
+        <div class="text-left">
+          <h3>New VM Request</h3>
+          <p><em>Fill up the below form for new Lab VM:</em></p>
+        </div>
+        <hr>
+        {% if count < 2  %}
+        <form action="{{ url_for('vmprocess.assign_vm') }}" method="POST">
+            <div class="form-group row">
+                <label for="requester" class="col-form-label col-sm-2">Requester</label>
+                <div class="col-sm-7">
+                    <input class="form-control" type="text" value="{{ requester }}" name="requester" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="OSselect" class="col-form-label col-sm-2">Select OS Version:</label>
+                <div class="col-sm-7">
+                    <select class="form-control" id="OSselect" name="osversion">
+                      <option>Windows 7</option>
+                      <option>Windows 10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="date-input" class="col-form-label col-sm-2">End Date:</label>
+                <div class="col-sm-7">
+                    <input class="form-control datepicker" placeholder="mm/dd/yyyy" name="date-input">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="purposeselect" class="col-form-label col-sm-2">Purpose:</label>
+                <div class="col-sm-7">
+                    <select class="form-control" id="purpose" name="purpose">
+                      <option>ToolKit</option>
+                      <option>Another App</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+              <label for="AdminsList" class="col-form-label col-sm-2">Administrators (optional)</label>
+              <div class="col-sm-7">
+                <textarea class="form-control" id="AdminsList" rows="3" name="adminslist"
+                        placeholder="Please enter the Lan ID's who needs a admin access seperated by comma(,). Eg: user1, r2-core\user2, r7-core\user7, etc.,"></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="RDUsersList" class="col-form-label col-sm-2">Remote Desktop Users (optional)</label>
+              <div class="col-sm-7">
+                <textarea class="form-control" id="RDUsersList" rows="3" name="RDUserslist"
+                        placeholder="Please enter the Lan ID's who needs a remote access seperated by comma(,). Eg: user1, r2-core\user2, r7-core\user7, etc.,"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          {% endif %}
+          {% if count >= 2  %}
+          <h5 style="color:red;">You have reached maxmimum number of VMs</h5>
+          {% endif %}
+      </div>
+    </div>
+    <div class="container">
+      <em>
+        <h3>Instructions:</h3>
+        Maximum 2 VMs will be allocated per user.
+        <h6>Any Issues, please contact below: </h6>
+        </br>
+        </br>
+        </br>
+      </em>
+    </div>
+    {% endblock %}

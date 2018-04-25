@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+    {% block content %}
+    <div class="container">
+      <form action="{{ url_for('deallocatedvms.move_to_available')}}" method="post">
+        <div>
+            <table class="col-10 table table-hover">
+              <thead>
+                <tr bgcolor="#00a3e3">
+                  <th></th>
+                  <th>Machine Name</th>
+                  <th>IP Address</th>
+                  <th>OS Version</th>
+                  <th>Host Name</th>
+                  <th>Require Rebuild</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for deallocatedVM in deallocatedVMs %}
+                <tr>
+                  <td><input type="checkbox" name="check" value="{{ deallocatedVM[0] }}"> </td>
+                  <td>{{ deallocatedVM[0] }}</td>
+                  <td>{{ deallocatedVM[1] }}</td>
+                  <td>{{ deallocatedVM[2] }}</td>
+                  <td>{{ deallocatedVM[3] }}</td>
+                  <td>{{ deallocatedVM[4] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        <div>
+          <button type="submit" name="submit" value="Remove VM" class="btn btn-danger">Move to Available</button>
+        </div>
+      </form>
+    </div>
+    {% endblock %}

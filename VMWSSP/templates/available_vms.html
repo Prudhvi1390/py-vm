@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+    <div class="container">
+        <div>
+            <table class="col-10 table table-hover">
+              <thead>
+                <tr bgcolor="#00a3e3">
+                  <th></th>
+                  <th>Machine Name</th>
+                  <th>IP Address</th>
+                  <th>OS Version</th>
+                  <th>Host Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for availableVM in availableVMs %}
+                <tr>
+                  <td><label class="checkbox-inline"><input type="checkbox"></label></td>
+                  <td>{{ availableVM[0] }}</td>
+                  <td>{{ availableVM[1] }}</td>
+                  <td>{{ availableVM[2] }}</td>
+                  <td>{{ availableVM[3] }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+    {% endblock %}
